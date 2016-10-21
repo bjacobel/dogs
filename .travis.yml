@@ -1,0 +1,41 @@
+language: node_js
+sudo: false
+node_js:
+  - 6
+cache:
+  directories:
+    - node_modules
+env:
+  global:
+    - NODE_ENV=production
+    - PATH=$PATH:$HOME/.local/bin
+before_install:
+  - npm install --global yarnpkg
+install:
+  - yarn
+script:
+  - yarn run lint
+  - yarn run test -- --coverage
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+before_deploy:
+  - yarn run webpack
+  - mkdir -p dist
+  - cp index.html dist/index.html
+  - pip install --user awscli
+deploy:
+  provider: s3
+  region: us-east-1
+  bucket: $(node config ProjectFQDomain)
+  acl: public_read
+  local_dir: dist
+  skip_cleanup: true
+  on:
+    branch:
+      - master
+    condition: $(node aws/utils bucketExists) = "true"
+after_deploy:
+  - node aws/utils invalidate
+notifications:
+  email: false
+  slack: bjacobel:xasDl3nTxo2feJGba70E43oR

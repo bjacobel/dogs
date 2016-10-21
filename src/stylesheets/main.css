@@ -1,0 +1,11 @@
+@value blue from './colors.css';
+
+.title {
+  composes: center from './shared.css';
+  composes: open-sans from './shared.css';
+  color: blue;
+
+  &::after {
+    content: '!';
+  }
+}
