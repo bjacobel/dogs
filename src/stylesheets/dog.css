@@ -4,6 +4,8 @@
 .dog {
   width: 480px;
   height: 480px;
+  box-sizing: border-box;
+  border: 1px solid borderColor;
 }
 
 .metaBox {
@@ -33,10 +35,15 @@
 
 .authorName {
   float: left;
-  composes: link from './link.css';
 }
 
 .permalink {
   float: right;
+}
+
+.authorName,
+.permalink {
+  font-weight: 500;
+  line-height: 29px;
   composes: link from './link.css';
 }
