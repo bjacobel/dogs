@@ -1,0 +1,4 @@
+.dogStandalone {
+  height: 100vh;
+  composes: center from './shared.css';
+}

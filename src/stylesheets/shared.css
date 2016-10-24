@@ -1,3 +1,5 @@
+@value bgColor from './colors.css';
+
 .center {
   display: flex;
   justify-content: center;
@@ -9,4 +11,11 @@
   @import 'https://fonts.googleapis.com/css?family=Open+Sans';
 
   font-family: 'Open Sans', sans-serif;
+}
+
+:global {
+  body {
+    margin: 0;
+    background-color: bgColor;
+  }
 }

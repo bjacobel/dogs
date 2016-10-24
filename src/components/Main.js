@@ -13,7 +13,6 @@ const mapDispatchToProps = {
   getAllDogsAsync,
 };
 
-// Separately export the MainComponent so it can be tested without being wrapped by connect()
 export class MainComponent extends Component {
   componentWillMount() {
     this.props.getAllDogsAsync();

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Match, Miss, BrowserRouter } from 'react-router';
 
 import NotFound from './NotFound';
-import Dog from './Dog';
+import DogPage from './DogPage';
 import Main from './Main';
 
 export default class Routes extends Component {
@@ -11,7 +11,7 @@ export default class Routes extends Component {
       <BrowserRouter>
         <div>
           <Match pattern="/" exactly component={ Main } />
-          <Match pattern="/dog/:id" component={ Dog } />
+          <Match pattern="/dog/:id" component={ DogPage } />
           <Miss component={ NotFound } />
         </div>
       </BrowserRouter>

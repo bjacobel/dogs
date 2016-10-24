@@ -1,5 +1,7 @@
+@value linkColor from './colors.css';
+
 .link {
-  composes: center from './shared.css';
+  color: linkColor;
   composes: open-sans from './shared.css';
   text-decoration: none;
 

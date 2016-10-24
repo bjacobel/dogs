@@ -1,3 +1,42 @@
+@value iconSize: 30px;
+@value borderColor from './colors.css';
+
 .dog {
-  composes: center from './shared.css';
+  width: 480px;
+  height: 480px;
+}
+
+.metaBox {
+  height: 64px;
+  padding: 17px;
+  margin-top: -4px;
+  background-color: white;
+  box-sizing: border-box;
+  border: 1px solid borderColor;
+  border-top: none;
+  border-radius: 0 0 3px 3px;
+
+  * {
+    display: inline-block;
+  }
+}
+
+.authorPhoto {
+  float: left;
+  border-radius: 50px;
+  box-sizing: border-box;
+  border: 1px solid borderColor;
+  width: iconSize;
+  height: iconSize;
+  margin-right: 10px;
+}
+
+.authorName {
+  float: left;
+  composes: link from './link.css';
+}
+
+.permalink {
+  float: right;
+  composes: link from './link.css';
 }
