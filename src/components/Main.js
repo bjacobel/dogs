@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 
 import styles from '../stylesheets/main.css';
-import { link } from '../stylesheets/link.css';
+import Dog from './Dog';
 import { getAllDogsAsync } from '../actions/dogs';
 
 const mapStateToProps = state => ({
-  title: state.title,
+  dogs: state.dogs,
 });
 
 const mapDispatchToProps = {
@@ -24,9 +23,13 @@ export class MainComponent extends Component {
     const { dogs } = this.props;
 
     return (
-      <div>
-        <pre>{ dogs }</pre>
-      </div>
+      <ul>
+        { Object.values(dogs).map(dog => (
+          <li key={ dog.id }>
+            <Dog dog={ dog } />
+          </li>
+        )) }
+      </ul>
     );
   }
 }

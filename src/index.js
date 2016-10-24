@@ -1,4 +1,4 @@
-import 'core-js/fn/object/entries';
+import 'core-js/fn/object/values';
 import 'rxjs/add/operator/toPromise';
 
 import React from 'react';

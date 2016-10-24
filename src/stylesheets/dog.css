@@ -1,0 +1,3 @@
+.dog {
+  composes: center from './shared.css';
+}
