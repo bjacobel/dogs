@@ -1,4 +1,6 @@
 import 'core-js/fn/object/entries';
+import 'rxjs/add/operator/toPromise';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import thunk from 'redux-thunk';

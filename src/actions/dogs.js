@@ -2,13 +2,13 @@ import {
   loadingStarted,
   loadingEnded,
 } from './loading';
-import { getAllDogs } from '../services/rethink';
+import { getAllDogs } from '../services/horizon';
 
 export const GET_ALL_DOGS_FAILED = 'GET_ALL_DOGS_FAILED';
 export const GET_ALL_DOGS_SUCCEEDED = 'GET_ALL_DOGS_SUCCEEDED';
 
-export const getAllDogsSucceeded = (title) => {
-  return { type: GET_ALL_DOGS_SUCCEEDED, payload: { title } };
+export const getAllDogsSucceeded = (dogs) => {
+  return { type: GET_ALL_DOGS_SUCCEEDED, payload: { dogs } };
 };
 
 export const getAllDogsFailed = (err) => {
@@ -25,6 +25,7 @@ export const getAllDogsAsync = () => {
         dispatch(getAllDogsSucceeded(dogs));
       })
       .catch((err) => {
+        console.error(err);
         dispatch(loadingEnded());
         dispatch(getAllDogsFailed(err));
       });

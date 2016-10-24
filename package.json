@@ -1,6 +1,7 @@
 {
   "author": "Brian Jacobel <brian@bjacobel.com> (https://bjacobel.com)",
   "dependencies": {
+    "@horizon/client": "^2.0.0",
     "core-js": "^2.4.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
@@ -8,8 +9,7 @@
     "react-router": "^4.0.0-alpha.4",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
-    "rethinkdb-websocket-client": "^0.5.1",
-    "whatwg-fetch": "^1.0.0"
+    "rxjs": "^5.0.0-rc.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.1",
