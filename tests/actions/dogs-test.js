@@ -21,7 +21,7 @@ import {
 jest.mock('../../src/services/horizon');
 import {
   getAllDogs,
-  getSpecificDog
+  getSpecificDog,
 } from '../../src/services/horizon';
 
 const mockStore = configureMockStore([thunk]);
