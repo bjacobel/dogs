@@ -1,5 +1,5 @@
 jest.mock('../../src/components/Main');
-jest.mock('../../src/components/Child');
+jest.mock('../../src/components/DogPage');
 jest.mock('../../src/components/NotFound');
 import Routes from '../../src/components/Routes';
 
@@ -22,10 +22,10 @@ describe('Routes component', () => {
   });
 
   it('has a route for child views that takes a url param', () => {
-    setPath('/child/1');
+    setPath('/dog/1');
     const routes = mount(<Routes />);
-    expect(routes.find('Child').length).toBe(1);
-    expect(routes.find('Child').props()).toEqual(jasmine.objectContaining({ params: { id: '1' } }));
+    expect(routes.find('DogPage').length).toBe(1);
+    expect(routes.find('DogPage').props()).toEqual(jasmine.objectContaining({ params: { id: '1' } }));
   });
 
   it('has a fallthrough 404', () => {

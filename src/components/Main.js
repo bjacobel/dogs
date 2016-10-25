@@ -1,7 +1,9 @@
+import 'core-js/fn/object/values';
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import styles from '../stylesheets/main.css';
+// import styles from '../stylesheets/main.css';
 import Dog from './Dog';
 import { getAllDogsAsync } from '../actions/dogs';
 

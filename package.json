@@ -51,7 +51,8 @@
       "src/**/*.js"
     ],
     "moduleNameMapper": {
-      "^.+\\.css$": "<rootDir>/__mocks__/stylesheets.js"
+      "^.+\\.css$": "<rootDir>/__mocks__/stylesheets.js",
+      "@horizon/client": "<rootDir>/__mocks__/@horizon-client.js"
     },
     "testPathDirs": [
       "./tests"

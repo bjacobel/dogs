@@ -14,8 +14,8 @@ export const getAllDogsSucceeded = (dogs) => {
   return { type: GET_ALL_DOGS_SUCCEEDED, payload: { dogs } };
 };
 
-export const getAllDogsFailed = (err) => {
-  return { type: GET_ALL_DOGS_FAILED, payload: { err } };
+export const getAllDogsFailed = (error) => {
+  return { type: GET_ALL_DOGS_FAILED, payload: { error } };
 };
 
 export const getAllDogsAsync = () => {
@@ -28,7 +28,6 @@ export const getAllDogsAsync = () => {
         dispatch(getAllDogsSucceeded(dogs));
       })
       .catch((err) => {
-        console.error(err);
         dispatch(loadingEnded());
         dispatch(getAllDogsFailed(err));
       });
@@ -42,8 +41,8 @@ export const getSpecificDogSucceeded = (dog) => {
   return { type: GET_SPECIFIC_DOG_SUCCEEDED, payload: { dog } };
 };
 
-export const getSpecificDogFailed = (err) => {
-  return { type: GET_SPECIFIC_DOG_FAILED, payload: { err } };
+export const getSpecificDogFailed = (error) => {
+  return { type: GET_SPECIFIC_DOG_FAILED, payload: { error } };
 };
 
 export const getSpecificDogAsync = (id) => {
@@ -56,7 +55,6 @@ export const getSpecificDogAsync = (id) => {
         dispatch(getSpecificDogSucceeded(dog));
       })
       .catch((err) => {
-        console.error(err);
         dispatch(loadingEnded());
         dispatch(getSpecificDogFailed(err));
       });

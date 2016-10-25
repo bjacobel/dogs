@@ -1,3 +1,5 @@
+import 'rxjs/add/operator/toPromise';
+
 import Horizon from '@horizon/client';
 import { HORIZON_AUTH } from '../constants';
 
