@@ -13,7 +13,7 @@ export default class Horizon {
     return this;
   }
 
-  toPromise() {
-    return Promise.resolve(this.data);
+  subscribe(dataFn) {
+    dataFn(this.data);
   }
 }

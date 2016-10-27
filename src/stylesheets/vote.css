@@ -1,0 +1,10 @@
+.voteContainer {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vote:first-of-type {
+  margin-right: 30px;
+}

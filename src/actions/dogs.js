@@ -22,15 +22,19 @@ export const getAllDogsAsync = () => {
   return (dispatch) => {
     dispatch(loadingStarted());
 
-    return getAllDogs()
-      .then((dogs) => {
+    const dogObservable = getAllDogs();
+    dogObservable.subscribe(
+      (dogs) => {
         dispatch(loadingEnded());
         dispatch(getAllDogsSucceeded(dogs));
-      })
-      .catch((err) => {
+      },
+      (error) => {
         dispatch(loadingEnded());
-        dispatch(getAllDogsFailed(err));
-      });
+        dispatch(getAllDogsFailed(error));
+      }
+    );
+
+    return dogObservable;
   };
 };
 
@@ -49,14 +53,18 @@ export const getSpecificDogAsync = (id) => {
   return (dispatch) => {
     dispatch(loadingStarted());
 
-    return getSpecificDog(id)
-      .then((dog) => {
+    const dogObservable = getSpecificDog(id);
+    dogObservable.subscribe(
+      (dog) => {
         dispatch(loadingEnded());
         dispatch(getSpecificDogSucceeded(dog));
-      })
-      .catch((err) => {
+      },
+      (error) => {
         dispatch(loadingEnded());
-        dispatch(getSpecificDogFailed(err));
-      });
+        dispatch(getSpecificDogFailed(error));
+      }
+    );
+
+    return dogObservable;
   };
 };

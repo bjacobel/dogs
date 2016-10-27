@@ -5,16 +5,16 @@ import {
 
 describe('Horizon services', () => {
   describe('getAllDogsAsync', () => {
-    it('returns a Promise which resolves with an array of dogs', () => {
-      return getAllDogs().then((dogs) => {
+    it('returns an rxjs observable which resolves with an array of dogs', () => {
+      return getAllDogs().subscribe((dogs) => {
         expect(dogs instanceof Array).toBeTruthy();
       });
     });
   });
 
   describe('getSpecifigDogAsync', () => {
-    it('returns a Promise which resolves with a dog object', () => {
-      return getSpecificDog().then((dog) => {
+    it('returns an rxjs observable which resolves with a dog object', () => {
+      return getSpecificDog().subscribe((dog) => {
         expect(dog instanceof Object).toBeTruthy();
       });
     });

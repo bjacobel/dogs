@@ -3,16 +3,21 @@ import 'core-js/fn/object/values';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// import styles from '../stylesheets/main.css';
-import Dog from './Dog';
-import { getAllDogsAsync } from '../actions/dogs';
+import styles from '../stylesheets/main.css';
+import Vote from './Vote';
+import {
+  getAllDogsAsync,
+  updateRankingsAsync,
+} from '../actions/dogs';
 
 const mapStateToProps = state => ({
   dogs: state.dogs,
+  rankings: state.rankings,
 });
 
 const mapDispatchToProps = {
   getAllDogsAsync,
+  updateRankingsAsync,
 };
 
 export class MainComponent extends Component {
@@ -24,13 +29,9 @@ export class MainComponent extends Component {
     const { dogs } = this.props;
 
     return (
-      <ul>
-        { Object.values(dogs).map(dog => (
-          <li key={ dog.id }>
-            <Dog dog={ dog } />
-          </li>
-        )) }
-      </ul>
+      <div className={ styles.voteWrapper }>
+        <Vote dogs={ dogs } rankings={ {} } updateRankingsAsync={ updateRankingsAsync } />
+      </div>
     );
   }
 }
