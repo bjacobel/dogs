@@ -20,7 +20,6 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 before_deploy:
   - yarn run webpack
-  - mkdir -p dist
   - cp index.html dist/index.html
   - pip install --user awscli
 deploy:

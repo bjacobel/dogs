@@ -43,7 +43,7 @@
 
 .authorName,
 .permalink {
-  font-weight: 500;
+  font-weight: 600;
   line-height: 29px;
   composes: link from './link.css';
 }
