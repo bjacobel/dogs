@@ -5,10 +5,8 @@ import { connect } from 'react-redux';
 
 import styles from '../stylesheets/main.css';
 import Vote from './Vote';
-import {
-  getAllDogsAsync,
-  updateRankingsAsync,
-} from '../actions/dogs';
+import { getAllDogsAsync } from '../actions/dogs';
+import { updateRankingsAsync } from '../actions/rankings';
 
 const mapStateToProps = state => ({
   dogs: state.dogs,
@@ -30,7 +28,7 @@ export class MainComponent extends Component {
 
     return (
       <div className={ styles.voteWrapper }>
-        <Vote dogs={ dogs } rankings={ {} } updateRankingsAsync={ updateRankingsAsync } />
+        <Vote dogs={ dogs } rankings={ {} } voteMethod={ updateRankingsAsync } />
       </div>
     );
   }

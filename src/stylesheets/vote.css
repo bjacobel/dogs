@@ -5,6 +5,14 @@
   align-items: center;
 }
 
-.vote:first-of-type {
-  margin-right: 30px;
+.vote {
+  cursor: pointer;
+
+  &:first-of-type {
+    margin-right: 30px;
+  }
+
+  &:focus {
+    outline: none;
+  }
 }

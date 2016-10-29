@@ -1,5 +1,6 @@
 @value iconSize: 30px;
 @value borderColor from './colors.css';
+@value darkerLinkColor from './colors.css';
 
 .dog {
   width: 480px;
@@ -45,5 +46,10 @@
 .permalink {
   font-weight: 600;
   line-height: 29px;
+  font-size: 1rem;
   composes: link from './link.css';
+}
+
+.instagramLogo {
+  height: 29px;
 }

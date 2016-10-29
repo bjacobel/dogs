@@ -9,11 +9,28 @@ export default class Vote extends Component {
   constructor(props) {
     super(props);
     this.randomDog = this.randomDog.bind(this);
+    this.voteWithKey = this.voteWithKey.bind(this);
   }
 
-  shouldComponentUpdate(nextProps) {
-    const currentProps = this.props;
-    return currentProps.rankings !== nextProps.rankings;
+  componentWillMount() {
+    document.addEventListener('keydown', this.voteWithKey);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.voteWithKey);
+  }
+
+  voteWithKey(event) {
+    const { voteMethod } = this.props;
+
+    if (['ArrowRight', 'ArrowLeft'].includes(event.key)) {
+      event.preventDefault();
+      if (event.key === 'ArrowLeft') {
+        voteMethod(this.dog1, this.dog2);
+      } else if (event.key === 'ArrowRight') {
+        voteMethod(this.dog2, this.dog1);
+      }
+    }
   }
 
   randomDog(except) {
@@ -27,17 +44,18 @@ export default class Vote extends Component {
   }
 
   render() {
-    const randomDog1 = this.randomDog();
-    const randomDog2 = this.randomDog(randomDog1);
+    const { voteMethod } = this.props;
+    this.dog1 = this.randomDog();
+    this.dog2 = this.randomDog(this.dog1);
 
     return (
       <div className={ styles.voteContainer }>
-        <div className={ styles.vote } >
-          <Dog dog={ randomDog1 } />
-        </div>
-        <div className={ styles.vote } >
-          <Dog dog={ randomDog2 } />
-        </div>
+        <button className={ styles.vote } onClick={ () => voteMethod(this.dog1, this.dog2) }>
+          <Dog dog={ this.dog1 } />
+        </button>
+        <button className={ styles.vote } onClick={ () => voteMethod(this.dog2, this.dog1) } >
+          <Dog dog={ this.dog2 } />
+        </button>
       </div>
     );
   }

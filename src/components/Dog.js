@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 
 import styles from '../stylesheets/dog.css';
+import instagramLogo from '../assets/images/instagram.svg';
 
 export default class Dog extends Component {
   render() {
     const { dog } = this.props;
+
     if (dog) {
       return (
         <div>
@@ -15,7 +16,10 @@ export default class Dog extends Component {
             <a className={ styles.authorName } href={ `https://instagram.com/${dog.authorName}` }>
               { dog.authorName }
             </a>
-            <Link to={ `/dog/${dog.id}` } className={ styles.permalink }>Permalink</Link>
+            <a href={ dog.link || `https://instagram.com/${dog.authorName}` } className={ styles.permalink }>
+              <span className="sr-only">View on Instagram</span>
+              <img className={ styles.instagramLogo } src={ instagramLogo } role="presentation" />
+            </a>
           </div>
         </div>
       );

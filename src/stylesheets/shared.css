@@ -15,5 +15,17 @@
   body {
     margin: 0;
     background-color: bgColor;
+    font-size: 16px;
+  }
+
+  button {
+    border: none;
+    -webkit-appearance: none;
+    background: none;
+    box-shadow: none;
+  }
+
+  .sr-only {
+    display: none !important;
   }
 }

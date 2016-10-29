@@ -16,7 +16,8 @@
     "aws-sdk": "^2.6.6",
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
-    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-es2016": "^6.16.0",
     "babel-preset-react": "^6.11.1",
     "cloudformer-node": "bjacobel/cloudformer-node",
     "cloudfriend": "bjacobel/cloudfriend",
@@ -52,7 +53,7 @@
       "src/**/*.js"
     ],
     "moduleNameMapper": {
-      "^.+\\.css$": "<rootDir>/__mocks__/stylesheets.js",
+      "^.+\\.css|svg$": "<rootDir>/__mocks__/stylesheets.js",
       "@horizon/client": "<rootDir>/__mocks__/@horizon-client.js"
     },
     "testPathDirs": [
