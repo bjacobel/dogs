@@ -24,14 +24,12 @@ export const getAllDogsAsync = () => {
 
     const dogObservable = getAllDogs();
     dogObservable.subscribe(
-      (dogs) => {
-        dispatch(loadingEnded());
-        dispatch(getAllDogsSucceeded(dogs));
-      },
+      dogs => dispatch(getAllDogsSucceeded(dogs)),
       (error) => {
         dispatch(loadingEnded());
         dispatch(getAllDogsFailed(error));
-      }
+      },
+      () => dispatch(loadingEnded()),
     );
 
     return dogObservable;
@@ -55,14 +53,12 @@ export const getSpecificDogAsync = (id) => {
 
     const dogObservable = getSpecificDog(id);
     dogObservable.subscribe(
-      (dog) => {
-        dispatch(loadingEnded());
-        dispatch(getSpecificDogSucceeded(dog));
-      },
+      dogs => dispatch(getSpecificDogSucceeded(dogs)),
       (error) => {
         dispatch(loadingEnded());
         dispatch(getSpecificDogFailed(error));
-      }
+      },
+      () => dispatch(loadingEnded()),
     );
 
     return dogObservable;

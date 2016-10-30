@@ -3,7 +3,7 @@ import {
   LOADING_ENDED,
 } from '../actions/loading';
 
-const loading = (state = false, action) => {
+export default (state = false, action) => {
   switch (action.type) {
   case LOADING_STARTED:
     return true;
@@ -13,5 +13,3 @@ const loading = (state = false, action) => {
     return state;
   }
 };
-
-export default loading;

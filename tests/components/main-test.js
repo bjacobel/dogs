@@ -12,7 +12,7 @@ describe('main component', () => {
           title={ { contents: 'foo' } }
           getAllDogsAsync={ getAllDogsAsync }
           dogs={ { 1: { id: 1 } } }
-        />
+        />,
       );
       expect(getAllDogsAsync).toHaveBeenCalled();
     });

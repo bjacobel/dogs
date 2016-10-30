@@ -16,6 +16,10 @@ export default class Vote extends Component {
     document.addEventListener('keydown', this.voteWithKey);
   }
 
+  shouldComponentUpdate(nextProps) {
+    return !nextProps.loading;
+  }
+
   componentWillUnmount() {
     document.removeEventListener('keydown', this.voteWithKey);
   }

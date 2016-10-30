@@ -13,7 +13,7 @@ describe('child component', () => {
         params={ { id: 'foo' } }
         dogs={ {} }
         getSpecificDogAsync={ getSpecificDogAsync }
-      />
+      />,
     );
 
     expect(getSpecificDogAsync).lastCalledWith('foo');
@@ -27,7 +27,7 @@ describe('child component', () => {
         params={ { id: 'foo' } }
         dogs={ { foo: { id: 'foo' } } }
         getSpecificDogAsync={ getSpecificDogAsync }
-      />
+      />,
     );
 
     expect(getSpecificDogAsync).not.toBeCalled();
@@ -39,7 +39,7 @@ describe('child component', () => {
         params={ { id: 'foo' } }
         dogs={ { foo: { id: 'foo' } } }
         getSpecificDogAsync={ jest.fn() }
-      />
+      />,
     );
 
     expect(dogPage.find('Dog').length).toBe(1);

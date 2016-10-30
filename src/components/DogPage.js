@@ -35,5 +35,5 @@ export class DogPageComponent extends Component {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(DogPageComponent);

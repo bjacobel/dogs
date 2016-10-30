@@ -11,6 +11,7 @@ import { updateRatingsAsync } from '../actions/ratings';
 const mapStateToProps = state => ({
   dogs: state.dogs,
   rankings: state.rankings,
+  loading: state.loading,
 });
 
 const mapDispatchToProps = {
@@ -26,12 +27,13 @@ export class MainComponent extends Component {
   render() {
     const {
       dogs,
+      loading,
       updateRatingsAsync,  // eslint-disable-line no-shadow
     } = this.props;
 
     return (
       <div className={ styles.voteWrapper }>
-        <Vote dogs={ dogs } voteMethod={ updateRatingsAsync } />
+        <Vote dogs={ dogs } voteMethod={ updateRatingsAsync } loading={ loading } />
       </div>
     );
   }
@@ -39,5 +41,5 @@ export class MainComponent extends Component {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(MainComponent);
