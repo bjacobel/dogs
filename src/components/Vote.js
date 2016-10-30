@@ -43,8 +43,8 @@ export default class Vote extends Component {
       delete dogs[except.id]; // can't get same dog twice
     }
 
-    const dogIds = Object.keys(dogs);
-    return dogs[dogIds[dogIds.length * Math.random() << 0]];  // eslint-disable-line no-bitwise
+    const ids = Object.keys(dogs);
+    return dogs[ids[ids.length * Math.random() << 0]];  // eslint-disable-line no-bitwise
   }
 
   render() {

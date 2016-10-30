@@ -11,7 +11,7 @@ export default (state = [], action) => {
   case GET_ALL_DOGS_SUCCEEDED:
     return action.payload.dogs.filter(x => x.rating).map(x => ({ id: x.id, rating: x.rating })).sort(sortOrder);
   case UPDATE_RATING_SUCCEEDED:
-    indexOfExistingDog = state.findIndex(x => x.id === action.payload.dogId);
+    indexOfExistingDog = state.findIndex(x => x.id === action.payload.id);
 
     if (indexOfExistingDog >= 0) {
       stateTrimmedOfExistingDog = [
@@ -24,7 +24,7 @@ export default (state = [], action) => {
 
     return [
       {
-        id: action.payload.dogId,
+        id: action.payload.id,
         rating: action.payload.rating,
       },
       ...stateTrimmedOfExistingDog,

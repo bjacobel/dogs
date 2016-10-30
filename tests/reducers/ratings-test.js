@@ -58,7 +58,7 @@ describe('ratings reducer', () => {
       expect(ratings(state, {
         type: UPDATE_RATING_SUCCEEDED,
         payload: {
-          dogId: 6,
+          id: 6,
           rating: 5,
         },
       })).toEqual([
@@ -75,7 +75,7 @@ describe('ratings reducer', () => {
       expect(ratings(state, {
         type: UPDATE_RATING_SUCCEEDED,
         payload: {
-          dogId: 2,
+          id: 2,
           rating: 11,
         },
       })).toEqual([

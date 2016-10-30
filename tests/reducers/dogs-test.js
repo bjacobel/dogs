@@ -63,7 +63,7 @@ describe('title reducer', () => {
       expect(dogs(preState, {
         type: UPDATE_RATING_SUCCEEDED,
         payload: {
-          dogId: 2,
+          id: 2,
           rating: 40,
         },
       })).toEqual({
@@ -93,7 +93,7 @@ describe('title reducer', () => {
       expect(dogs(preState, {
         type: UPDATE_RATING_SUCCEEDED,
         payload: {
-          dogId: 4,
+          id: 4,
           rating: 100,
         },
       })).toEqual({

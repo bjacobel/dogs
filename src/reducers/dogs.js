@@ -17,7 +17,7 @@ export default (state = {}, action) => {
     return Object.assign({}, state, { [action.payload.dog.id]: action.payload.dog });
   case UPDATE_RATING_SUCCEEDED:
     return Object.assign({}, state, {
-      [action.payload.dogId]: Object.assign({}, state[action.payload.dogId], { rating: action.payload.rating }),
+      [action.payload.id]: Object.assign({}, state[action.payload.id], { rating: action.payload.rating }),
     });
   default:
     return state;
