@@ -1,0 +1,21 @@
+@value highlightTextColor from './colors.css';
+
+.spinner {
+  height: 30px;
+  width: 30px;
+  animation: rotate 0.8s infinite linear;
+  border: 7px solid highlightTextColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+}
+
+.spinnerContainer {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0); }
+  100% { transform: rotate(360deg); }
+}

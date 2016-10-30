@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import styles from '../stylesheets/main.css';
 import Vote from './Vote';
+import Loading from './Loading';
 import { getAllDogsAsync } from '../actions/dogs';
 import { updateRatingsAsync } from '../actions/ratings';
 
@@ -32,8 +33,11 @@ export class MainComponent extends Component {
     } = this.props;
 
     return (
-      <div className={ styles.voteWrapper }>
-        <Vote dogs={ dogs } voteMethod={ updateRatingsAsync } loading={ loading } />
+      <div>
+        <Loading loading={ loading } />
+        <div className={ styles.voteWrapper }>
+          <Vote dogs={ dogs } voteMethod={ updateRatingsAsync } loading={ loading } />
+        </div>
       </div>
     );
   }
