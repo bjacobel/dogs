@@ -23,6 +23,7 @@
     -webkit-appearance: none;
     background: none;
     box-shadow: none;
+    padding: 0;
   }
 
   .sr-only {

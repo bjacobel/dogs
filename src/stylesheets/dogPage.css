@@ -2,3 +2,10 @@
   height: 100vh;
   composes: center from './shared.css';
 }
+
+.homeLink {
+  composes: link from './link.css';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}

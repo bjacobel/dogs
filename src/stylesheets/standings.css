@@ -1,0 +1,25 @@
+.minidog {
+  height: 75px;
+  width: 75px;
+  position: absolute;
+  top: 0;
+  display: block;
+  background-size: 150%;
+  background-position: center;
+  transition: 0.2s ease;
+
+  &:hover {
+    z-index: 2;
+    transform: scale(1.15);
+    transform-origin: top;
+  }
+}
+
+.rankings {
+  height: 75px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  composes: link from './link.css';
+}

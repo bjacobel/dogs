@@ -4,6 +4,7 @@
   color: linkColor;
   composes: roboto from './shared.css';
   text-decoration: none;
+  cursor: pointer;
 
   &:hover {
     text-decoration: underline;

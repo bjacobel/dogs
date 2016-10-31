@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import styles from '../stylesheets/dogPage.css';
 import Dog from './Dog';
@@ -27,6 +28,7 @@ export class DogPageComponent extends Component {
 
     return (
       <div className={ styles.dogStandalone }>
+        <Link to="/" className={ styles.homeLink }>← Home</Link>
         <Dog dog={ dog } />
       </div>
     );

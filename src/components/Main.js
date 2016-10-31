@@ -6,12 +6,13 @@ import { connect } from 'react-redux';
 import styles from '../stylesheets/main.css';
 import Vote from './Vote';
 import Loading from './Loading';
+import Standings from './Standings';
 import { getAllDogsAsync } from '../actions/dogs';
 import { updateRatingsAsync } from '../actions/ratings';
 
 const mapStateToProps = state => ({
   dogs: state.dogs,
-  rankings: state.rankings,
+  ratings: state.ratings,
   loading: state.loading,
 });
 
@@ -29,12 +30,14 @@ export class MainComponent extends Component {
     const {
       dogs,
       loading,
+      ratings,
       updateRatingsAsync,  // eslint-disable-line no-shadow
     } = this.props;
 
     return (
       <div>
         <Loading loading={ loading } />
+        <Standings dogs={ dogs } ratings={ ratings } />
         <div className={ styles.voteWrapper }>
           <Vote dogs={ dogs } voteMethod={ updateRatingsAsync } loading={ loading } />
         </div>
