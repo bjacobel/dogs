@@ -39,12 +39,14 @@ export default class Vote extends Component {
 
   randomDog(except) {
     const { dogs } = this.props;
+    const dogsCopy = Object.assign({}, dogs);
+
     if (except) {
-      delete dogs[except.id]; // can't get same dog twice
+      delete dogsCopy[except.id]; // can't get same dog twice
     }
 
-    const ids = Object.keys(dogs);
-    return dogs[ids[ids.length * Math.random() << 0]];  // eslint-disable-line no-bitwise
+    const ids = Object.keys(dogsCopy);
+    return dogsCopy[ids[ids.length * Math.random() << 0]];  // eslint-disable-line no-bitwise
   }
 
   render() {
