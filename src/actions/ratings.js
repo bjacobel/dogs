@@ -31,9 +31,7 @@ export const updateRatingsAsync = (winner, loser) => {
     const mergedObservable = updateWinnerObservable.merge(updateLoserObservable);
 
     mergedObservable.subscribe(
-      (data) => {
-        dispatch(updateRatingSucceeded(data.id, ratings[data.id]));
-      },
+      data => dispatch(updateRatingSucceeded(data.id, ratings[data.id])),
       (error) => {
         dispatch(updateRatingFailed(error));
         dispatch(loadingEnded());

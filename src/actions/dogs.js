@@ -26,8 +26,8 @@ export const getAllDogsAsync = () => {
     dogObservable.subscribe(
       dogs => dispatch(getAllDogsSucceeded(dogs)),
       (error) => {
-        dispatch(loadingEnded());
         dispatch(getAllDogsFailed(error));
+        dispatch(loadingEnded());
       },
       () => dispatch(loadingEnded()),
     );
@@ -55,8 +55,8 @@ export const getSpecificDogAsync = (id) => {
     dogObservable.subscribe(
       dogs => dispatch(getSpecificDogSucceeded(dogs)),
       (error) => {
-        dispatch(loadingEnded());
         dispatch(getSpecificDogFailed(error));
+        dispatch(loadingEnded());
       },
       () => dispatch(loadingEnded()),
     );
