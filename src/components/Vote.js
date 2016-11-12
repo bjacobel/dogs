@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 
 import Dog from './Dog';
+import is404 from '../services/is404';
 import styles from '../stylesheets/vote.css';
 
 export default class Vote extends Component {
@@ -10,6 +11,7 @@ export default class Vote extends Component {
     super(props);
     this.randomDog = this.randomDog.bind(this);
     this.voteWithKey = this.voteWithKey.bind(this);
+    this.check404 = this.check404.bind(this);
   }
 
   componentWillMount() {
@@ -49,10 +51,27 @@ export default class Vote extends Component {
     return dogsCopy[ids[ids.length * Math.random() << 0]];  // eslint-disable-line no-bitwise
   }
 
+  check404() {
+    const { voteMethod } = this.props;
+
+    // don't run this until we have data
+    if (this.dog1 && this.dog2) {
+      is404(this.dog1.photoSrc).catch(() => {
+        voteMethod(this.dog2, this.dog1);
+      });
+
+      is404(this.dog2.photoSrc).catch(() => {
+        voteMethod(this.dog1, this.dog2);
+      });
+    }
+  }
+
   render() {
     const { voteMethod } = this.props;
     this.dog1 = this.randomDog();
     this.dog2 = this.randomDog(this.dog1);
+
+    this.check404();
 
     return (
       <div className={ styles.voteContainer }>
