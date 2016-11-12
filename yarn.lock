@@ -3490,6 +3490,10 @@ lodash.merge@^4.4.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.0.tgz#69884ba144ac33fe699737a6086deffadd0f89c5"
 
+lodash.omit@^4.3.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.omit/-/lodash.omit-4.5.0.tgz#6eb19ae5a1ee1dd9df0b969e66ce0b7fa30b5e60"
+
 lodash.pick@^4.2.1:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.pick/-/lodash.pick-4.4.0.tgz#52f05610fff9ded422611441ed1fc123a03001b3"
@@ -4687,6 +4691,12 @@ react-broadcast@^0.1.1:
 react-dom@^15.3.2:
   version "15.3.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.3.2.tgz#c46b0aa5380d7b838e7a59c4a7beff2ed315531f"
+
+react-flip-move:
+  version "2.6.7"
+  resolved "https://registry.yarnpkg.com/react-flip-move/-/react-flip-move-2.6.7.tgz#3d55f728aa05eed7c6c7bf3e86cfc4ddd87f0ea3"
+  dependencies:
+    lodash.omit "^4.3.0"
 
 react-redux@^4.4.5:
   version "4.4.5"

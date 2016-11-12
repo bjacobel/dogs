@@ -1,7 +1,14 @@
 import { GET_ALL_DOGS_SUCCEEDED } from '../actions/dogs';
 import { UPDATE_RATING_SUCCEEDED } from '../actions/ratings';
 
-const sortOrder = (foo, bar) => bar.rating - foo.rating;
+const sortOrder = (foo, bar) => {
+  if (bar.rating !== foo.rating) {
+    return bar.rating - foo.rating;
+  } else {
+    // sometimes the ratings are the same, so compare the IDs so that the standings are always deterministic
+    return bar.id.localeCompare(foo.id);
+  }
+};
 
 export default (state = [], action) => {
   let indexOfExistingDog;
