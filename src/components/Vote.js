@@ -19,7 +19,18 @@ export default class Vote extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return !nextProps.loading;
+    if (nextProps.loading) {
+      return false;
+    } else if (
+        this.dog1 &&
+        this.dog2 &&
+        nextProps.dogs[this.dog1.id] === this.dog1 &&
+        nextProps.dogs[this.dog2.id] === this.dog2
+      ) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   componentWillUnmount() {

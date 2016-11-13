@@ -1,5 +1,8 @@
 import calculateElo from '../services/elo';
-import { updateRating } from '../services/horizon';
+import {
+  updateRating,
+  watchRatings,
+} from '../services/horizon';
 import {
   loadingStarted,
   loadingEnded,
@@ -40,5 +43,20 @@ export const updateRatingsAsync = (horizon, winner, loser) => {
     );
 
     return mergedObservable;
+  };
+};
+
+export const subscribeToRatingsUpdates = (horizon) => {
+  return (dispatch) => {
+    watchRatings(horizon).subscribe(
+      (diff) => {
+        // normally we would put inspecting data inside a reducer, but it would be nice to be able to reuse
+        // the same reducer we already have, so normalize here
+        if (['change', 'add'].includes(diff.type)) {
+          dispatch(updateRatingSucceeded(diff.new_val.id, diff.new_val.rating));
+        }
+      },
+      error => dispatch(updateRatingFailed(error)),
+    );
   };
 };

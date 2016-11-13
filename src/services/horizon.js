@@ -19,3 +19,7 @@ export const getSpecificDog = (horizon, id) => {
 export const updateRating = (horizon, id, newRating) => {
   return horizon.update({ id, rating: newRating });
 };
+
+export const watchRatings = (horizon) => {
+  return horizon.watch({ rawChanges: true });
+};

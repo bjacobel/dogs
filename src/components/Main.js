@@ -8,7 +8,9 @@ import Vote from './Vote';
 import Loading from './Loading';
 import Standings from './Standings';
 import { getAllDogsAsync } from '../actions/dogs';
-import { updateRatingsAsync } from '../actions/ratings';
+import {
+  updateRatingsAsync,
+} from '../actions/ratings';
 import { getOrCreateHorizonClient } from '../actions/horizon';
 
 const mapStateToProps = state => ({
@@ -26,7 +28,8 @@ const mapDispatchToProps = {
 
 export class MainComponent extends Component {
   componentWillMount() {
-    this.props.getAllDogsAsync(this.props.getOrCreateHorizonClient());
+    const horizon = this.props.getOrCreateHorizonClient();
+    this.props.getAllDogsAsync(horizon);
   }
 
   render() {

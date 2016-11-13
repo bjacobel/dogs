@@ -2,6 +2,7 @@ import {
   loadingStarted,
   loadingEnded,
 } from './loading';
+import { subscribeToRatingsUpdates } from './ratings';
 import {
   getAllDogs,
   getSpecificDog,
@@ -24,12 +25,15 @@ export const getAllDogsAsync = (horizon) => {
 
     const dogObservable = getAllDogs(horizon);
     dogObservable.subscribe(
-      dogs => dispatch(getAllDogsSucceeded(dogs)),
+      (dogs) => {
+        dispatch(getAllDogsSucceeded(dogs));
+        dispatch(loadingEnded());
+      },
       (error) => {
         dispatch(getAllDogsFailed(error));
         dispatch(loadingEnded());
       },
-      () => dispatch(loadingEnded()),
+      () => dispatch(subscribeToRatingsUpdates(horizon)),
     );
 
     return dogObservable;
