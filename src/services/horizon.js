@@ -3,17 +3,19 @@ import { HORIZON_AUTH } from '../constants';
 
 // @TODO: Init one Horizon, store it in state, use the same ws connection for all calls
 
-export const getAllDogs = () => {
-  const horizon = new Horizon(HORIZON_AUTH);
-  return horizon('dogs').fetch();
+export const createClient = () => {
+  const client = new Horizon(HORIZON_AUTH);
+  return client('dogs');
 };
 
-export const getSpecificDog = (id) => {
-  const horizon = new Horizon(HORIZON_AUTH);
-  return horizon('dogs').find({ id }).fetch();
+export const getAllDogs = (horizon) => {
+  return horizon.fetch();
 };
 
-export const updateRating = (id, newRating) => {
-  const horizon = new Horizon(HORIZON_AUTH);
-  return horizon('dogs').update({ id, rating: newRating });
+export const getSpecificDog = (horizon, id) => {
+  return horizon.find({ id }).fetch();
+};
+
+export const updateRating = (horizon, id, newRating) => {
+  return horizon.update({ id, rating: newRating });
 };

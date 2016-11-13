@@ -27,14 +27,14 @@ export default class Vote extends Component {
   }
 
   voteWithKey(event) {
-    const { voteMethod } = this.props;
+    const { voteMethod, horizon } = this.props;
 
     if (['ArrowRight', 'ArrowLeft'].includes(event.key)) {
       event.preventDefault();
       if (event.key === 'ArrowLeft') {
-        voteMethod(this.dog1, this.dog2);
+        voteMethod(horizon, this.dog1, this.dog2);
       } else if (event.key === 'ArrowRight') {
-        voteMethod(this.dog2, this.dog1);
+        voteMethod(horizon, this.dog2, this.dog1);
       }
     }
   }
@@ -52,22 +52,22 @@ export default class Vote extends Component {
   }
 
   check404() {
-    const { voteMethod } = this.props;
+    const { voteMethod, horizon } = this.props;
 
     // don't run this until we have data
     if (this.dog1 && this.dog2) {
       is404(this.dog1.photoSrc).catch(() => {
-        voteMethod(this.dog2, this.dog1);
+        voteMethod(horizon, this.dog2, this.dog1);
       });
 
       is404(this.dog2.photoSrc).catch(() => {
-        voteMethod(this.dog1, this.dog2);
+        voteMethod(horizon, this.dog1, this.dog2);
       });
     }
   }
 
   render() {
-    const { voteMethod } = this.props;
+    const { voteMethod, horizon } = this.props;
     this.dog1 = this.randomDog();
     this.dog2 = this.randomDog(this.dog1);
 
@@ -75,10 +75,10 @@ export default class Vote extends Component {
 
     return (
       <div className={ styles.voteContainer }>
-        <button className={ styles.vote } onClick={ () => voteMethod(this.dog1, this.dog2) }>
+        <button className={ styles.vote } onClick={ () => voteMethod(horizon, this.dog1, this.dog2) }>
           <Dog dog={ this.dog1 } />
         </button>
-        <button className={ styles.vote } onClick={ () => voteMethod(this.dog2, this.dog1) } >
+        <button className={ styles.vote } onClick={ () => voteMethod(horizon, this.dog2, this.dog1) } >
           <Dog dog={ this.dog2 } />
         </button>
       </div>

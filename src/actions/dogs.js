@@ -18,11 +18,11 @@ export const getAllDogsFailed = (error) => {
   return { type: GET_ALL_DOGS_FAILED, payload: { error } };
 };
 
-export const getAllDogsAsync = () => {
+export const getAllDogsAsync = (horizon) => {
   return (dispatch) => {
     dispatch(loadingStarted());
 
-    const dogObservable = getAllDogs();
+    const dogObservable = getAllDogs(horizon);
     dogObservable.subscribe(
       dogs => dispatch(getAllDogsSucceeded(dogs)),
       (error) => {
@@ -47,11 +47,11 @@ export const getSpecificDogFailed = (error) => {
   return { type: GET_SPECIFIC_DOG_FAILED, payload: { error } };
 };
 
-export const getSpecificDogAsync = (id) => {
+export const getSpecificDogAsync = (horizon, id) => {
   return (dispatch) => {
     dispatch(loadingStarted());
 
-    const dogObservable = getSpecificDog(id);
+    const dogObservable = getSpecificDog(horizon, id);
     dogObservable.subscribe(
       dogs => dispatch(getSpecificDogSucceeded(dogs)),
       (error) => {

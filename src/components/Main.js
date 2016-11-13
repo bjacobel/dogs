@@ -9,21 +9,24 @@ import Loading from './Loading';
 import Standings from './Standings';
 import { getAllDogsAsync } from '../actions/dogs';
 import { updateRatingsAsync } from '../actions/ratings';
+import { getOrCreateHorizonClient } from '../actions/horizon';
 
 const mapStateToProps = state => ({
   dogs: state.dogs,
   ratings: state.ratings,
   loading: state.loading,
+  horizon: state.horizon,
 });
 
 const mapDispatchToProps = {
   getAllDogsAsync,
   updateRatingsAsync,
+  getOrCreateHorizonClient,
 };
 
 export class MainComponent extends Component {
   componentWillMount() {
-    this.props.getAllDogsAsync();
+    this.props.getAllDogsAsync(this.props.getOrCreateHorizonClient());
   }
 
   render() {
@@ -31,6 +34,7 @@ export class MainComponent extends Component {
       dogs,
       loading,
       ratings,
+      horizon,
       updateRatingsAsync,  // eslint-disable-line no-shadow
     } = this.props;
 
@@ -39,7 +43,7 @@ export class MainComponent extends Component {
         <Loading loading={ loading } />
         <Standings dogs={ dogs } ratings={ ratings } />
         <div className={ styles.voteWrapper }>
-          <Vote dogs={ dogs } voteMethod={ updateRatingsAsync } loading={ loading } />
+          <Vote dogs={ dogs } voteMethod={ updateRatingsAsync } horizon={ horizon } loading={ loading } />
         </div>
       </div>
     );

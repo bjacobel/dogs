@@ -16,7 +16,7 @@ export const updateRatingFailed = (error) => {
   return { type: UPDATE_RATING_FAILED, payload: { error } };
 };
 
-export const updateRatingsAsync = (winner, loser) => {
+export const updateRatingsAsync = (horizon, winner, loser) => {
   return (dispatch) => {
     dispatch(loadingStarted());
 
@@ -26,8 +26,8 @@ export const updateRatingsAsync = (winner, loser) => {
       [loser.id]: loserNewRating,
     };
 
-    const updateWinnerObservable = updateRating(winner.id, winnerNewRating);
-    const updateLoserObservable = updateRating(loser.id, loserNewRating);
+    const updateWinnerObservable = updateRating(horizon, winner.id, winnerNewRating);
+    const updateLoserObservable = updateRating(horizon, loser.id, loserNewRating);
     const mergedObservable = updateWinnerObservable.merge(updateLoserObservable);
 
     mergedObservable.subscribe(

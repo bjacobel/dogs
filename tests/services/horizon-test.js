@@ -1,3 +1,5 @@
+import Horizon from '@horizon/client';
+
 import {
   getAllDogs,
   getSpecificDog,
@@ -6,7 +8,7 @@ import {
 describe('Horizon services', () => {
   describe('getAllDogsAsync', () => {
     it('returns an rxjs observable which resolves with an array of dogs', () => {
-      return getAllDogs().subscribe((dogs) => {
+      return getAllDogs((new Horizon())('collection')).subscribe((dogs) => {
         expect(dogs instanceof Array).toBeTruthy();
       });
     });
@@ -14,7 +16,7 @@ describe('Horizon services', () => {
 
   describe('getSpecifigDogAsync', () => {
     it('returns an rxjs observable which resolves with a dog object', () => {
-      return getSpecificDog().subscribe((dog) => {
+      return getSpecificDog((new Horizon())('collection')).subscribe((dog) => {
         expect(dog instanceof Object).toBeTruthy();
       });
     });
