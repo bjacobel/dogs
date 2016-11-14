@@ -23,6 +23,7 @@ jest.mock('../../src/services/horizon');
 import {
   getAllDogs,
   getSpecificDog,
+  watchRatings,
 } from '../../src/services/horizon';
 
 const mockStore = configureMockStore([thunk]);
@@ -57,6 +58,7 @@ describe('dog actions', () => {
       beforeEach(() => {
         store = mockStore({});
         getAllDogs.mockImplementation(() => Observable.of([{ id: 1 }]));
+        watchRatings.mockImplementation(() => Observable.of([{ type: 'add', id: 1, rating: 1000 }]));
       });
 
       it('dispatches loadingStarted', () => {
@@ -85,6 +87,16 @@ describe('dog actions', () => {
             jasmine.objectContaining({ type: GET_ALL_DOGS_FAILED }),
           ]));
         });
+      });
+
+      it('calls getAllDogs, on close it starts a watcher for ratings events', () => {
+        store.dispatch(getAllDogsAsync()).subscribe(
+          jest.fn(),
+          jest.fn(),
+          () => {
+            expect(watchRatings).toHaveBeenCalled();
+          },
+        );
       });
     });
   });
