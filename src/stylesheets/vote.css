@@ -5,6 +5,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
 }
 
 .vote {
@@ -22,5 +26,14 @@
 
   &:hover {
     transform: scale(1.015);
+  }
+
+  @media (max-width: 600px) {
+    max-height: calc(50% - 50px);
+    max-width: unset;
+
+    &:first-of-type {
+      margin: 0;
+    }
   }
 }
