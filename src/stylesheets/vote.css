@@ -2,12 +2,14 @@
 
 .voteContainer {
   width: 100vw;
+  height: calc(100vh - 75px);
   display: flex;
   justify-content: center;
   align-items: center;
 
   @media (max-width: 600px) {
     flex-direction: column;
+    height: calc(100vh - 50px);
   }
 }
 
@@ -29,11 +31,12 @@
   }
 
   @media (max-width: 600px) {
-    max-height: calc(50% - 50px);
     max-width: unset;
+    max-height: 50%;
+    margin: 20px;
 
     &:first-of-type {
-      margin: 0;
+      margin: 20px 20px 0;
     }
   }
 }
