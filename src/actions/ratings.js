@@ -1,3 +1,5 @@
+import ReactGA from 'react-ga';
+
 import calculateElo from '../services/elo';
 import {
   updateRating,
@@ -41,6 +43,11 @@ export const updateRatingsAsync = (horizon, winner, loser) => {
       },
       () => dispatch(loadingEnded()),
     );
+
+    ReactGA.event({
+      category: 'Vote',
+      action: 'Voted for a dog',
+    });
 
     return mergedObservable;
   };

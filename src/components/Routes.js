@@ -12,10 +12,6 @@ function logPageView() {
 }
 
 export default class Routes extends Component {
-  componentWillMount() {
-    ReactGA.initialize('UA-34138258-6');
-  }
-
   render() {
     return (
       <BrowserRouter onUpdate={ logPageView }>
