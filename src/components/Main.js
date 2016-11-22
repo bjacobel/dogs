@@ -23,7 +23,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   getAllDogsAsync,
   updateRatingsAsync,
-  getOrCreatFirebasenClient,
+  getOrCreateFirebaseClient,
 };
 
 export class MainComponent extends Component {

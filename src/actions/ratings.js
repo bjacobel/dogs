@@ -4,7 +4,7 @@ import calculateElo from '../services/elo';
 import {
   updateRating,
   watchRatings,
-} from '../serfirebase';
+} from '../services/firebase';
 import {
   loadingStarted,
   loadingEnded,

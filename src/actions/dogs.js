@@ -23,20 +23,16 @@ export const getAllDogsAsync = (firebase) => {
   return (dispatch) => {
     dispatch(loadingStarted());
 
-    const dogObservable = getAllDogs(firebase);
-    dogObservable.subscribe(
-      (dogs) => {
-        dispatch(getAllDogsSucceeded(dogs));
+    getAllDogs(firebase)
+      .then((dogs) => {
+        dispatch(getAllDogsSucceeded(dogs.val()));
         dispatch(loadingEnded());
-      },
-      (error) => {
+        subscribeToRatingsUpdates(firebase);
+      })
+      .catch((error) => {
         dispatch(getAllDogsFailed(error));
         dispatch(loadingEnded());
-      },
-      () => dispatch(subscribeToRatingsUpdates(firebase)),
-    );
-
-    return dogObservable;
+      });
   };
 };
 
@@ -55,16 +51,14 @@ export const getSpecificDogAsync = (firebase, id) => {
   return (dispatch) => {
     dispatch(loadingStarted());
 
-    const dogObservable = getSpecificDog(firebase, id);
-    dogObservable.subscribe(
-      dogs => dispatch(getSpecificDogSucceeded(dogs)),
-      (error) => {
+    getSpecificDog(firebase, id)
+      .then((dog) => {
+        dispatch(getSpecificDogSucceeded(dog.val()));
+        dispatch(loadingEnded());
+      })
+      .catch((error) => {
         dispatch(getSpecificDogFailed(error));
         dispatch(loadingEnded());
-      },
-      () => dispatch(loadingEnded()),
-    );
-
-    return dogObservable;
+      });
   };
 };

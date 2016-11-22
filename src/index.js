@@ -7,12 +7,12 @@ import ReactGA from 'react-ga';
 
 import reducer from './reducers';
 import {
-  SHOW_DEVTOOLS,
+  SHOW_DEV_TOOLS,
   TRACK_ANALYTICS,
   GA_ID,
 } from './constants';
 
-const composeEnhancers = (SHOW_DEVTOOLS && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;  // eslint-disable-line max-len, no-underscore-dangle
+const composeEnhancers = (SHOW_DEV_TOOLS && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;  // eslint-disable-line max-len, no-underscore-dangle
 
 const store = createStore(reducer, {}, composeEnhancers(
   applyMiddleware(...[thunk]),
