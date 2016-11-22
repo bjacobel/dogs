@@ -1,8 +1,8 @@
 {
   "author": "Brian Jacobel <brian@bjacobel.com> (https://bjacobel.com)",
   "dependencies": {
-    "@horizon/client": "^2.0.0",
     "core-js": "^2.4.1",
+    "firebase": "^3.6.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-flip-move": "^2.6.7",
@@ -11,6 +11,7 @@
     "react-router": "^4.0.0-alpha.4",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
+    "rx-firebase": "^0.4.0",
     "rxjs": "^5.0.0-rc.1"
   },
   "devDependencies": {

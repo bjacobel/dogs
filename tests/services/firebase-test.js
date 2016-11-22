@@ -1,14 +1,14 @@
-import Horizon from '@horizon/client';
+import Firebase from 'firebase';
 
 import {
   getAllDogs,
   getSpecificDog,
-} from '../../src/services/horizon';
+} from '../../src/services/firebase';
 
-describe('Horizon services', () => {
+describe('Firebase services', () => {
   describe('getAllDogsAsync', () => {
     it('returns an rxjs observable which resolves with an array of dogs', () => {
-      return getAllDogs((new Horizon())('collection')).subscribe((dogs) => {
+      return getAllDogs((new Firebase())('collection')).subscribe((dogs) => {
         expect(dogs instanceof Array).toBeTruthy();
       });
     });
@@ -16,7 +16,7 @@ describe('Horizon services', () => {
 
   describe('getSpecifigDogAsync', () => {
     it('returns an rxjs observable which resolves with a dog object', () => {
-      return getSpecificDog((new Horizon())('collection')).subscribe((dog) => {
+      return getSpecificDog((new Firebase())('collection')).subscribe((dog) => {
         expect(dog instanceof Object).toBeTruthy();
       });
     });

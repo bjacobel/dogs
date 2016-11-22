@@ -1,6 +1,6 @@
 export const SHOW_DEV_TOOLS = process.env.NODE_ENV !== 'production';
 export const TRACK_ANALYTICS = process.env.NODE_ENV !== 'production';
-export const HORIZON_AUTH = {
+export const FIREBASE_AUTH = {
   host: 'rethinkdb.bjacobel.com:28016',
   secure: true,
 };

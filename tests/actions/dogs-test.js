@@ -19,12 +19,12 @@ import {
   LOADING_ENDED,
 } from '../../src/actions/loading';
 
-jest.mock('../../src/services/horizon');
+jest.mock('../../src/services/firebase');
 import {
   getAllDogs,
   getSpecificDog,
   watchRatings,
-} from '../../src/services/horizon';
+} from '../../src/services/firebase';
 
 const mockStore = configureMockStore([thunk]);
 

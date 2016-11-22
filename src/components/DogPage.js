@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import styles from '../stylesheets/dogPage.css';
 import Dog from './Dog';
 import { getSpecificDogAsync } from '../actions/dogs';
-import { getOrCreateHorizonClient } from '../actions/horizon';
+import { getOrCreateFirebaseClient } from '../actions/firebase';
 
 const mapStateToProps = state => ({
   dogs: state.dogs,
@@ -13,14 +13,14 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getSpecificDogAsync,
-  getOrCreateHorizonClient,
+  getOrCreateFirebaseClient,
 };
 
 export class DogPageComponent extends Component {
   componentWillMount() {
     const { params, dogs } = this.props;
     if (!dogs[params.id]) {
-      this.props.getSpecificDogAsync(this.props.getOrCreateHorizonClient(), params.id);
+      this.props.getSpecificDogAsync(this.props.getOrCreateFirebaseClient(), params.id);
     }
   }
 

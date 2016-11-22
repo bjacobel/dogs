@@ -4,7 +4,7 @@ import calculateElo from '../services/elo';
 import {
   updateRating,
   watchRatings,
-} from '../services/horizon';
+} from '../serfirebase';
 import {
   loadingStarted,
   loadingEnded,
@@ -21,7 +21,7 @@ export const updateRatingFailed = (error) => {
   return { type: UPDATE_RATING_FAILED, payload: { error } };
 };
 
-export const updateRatingsAsync = (horizon, winner, loser) => {
+export const updateRatingsAsync = (firebase, winner, loser) => {
   return (dispatch) => {
     dispatch(loadingStarted());
 
@@ -31,8 +31,8 @@ export const updateRatingsAsync = (horizon, winner, loser) => {
       [loser.id]: loserNewRating,
     };
 
-    const updateWinnerObservable = updateRating(horizon, winner.id, winnerNewRating);
-    const updateLoserObservable = updateRating(horizon, loser.id, loserNewRating);
+    const updateWinnerObservable = updateRating(firebase, winner.id, winnerNewRating);
+    const updateLoserObservable = updateRating(firebase, loser.id, loserNewRating);
     const mergedObservable = updateWinnerObservable.merge(updateLoserObservable);
 
     mergedObservable.subscribe(
@@ -53,9 +53,9 @@ export const updateRatingsAsync = (horizon, winner, loser) => {
   };
 };
 
-export const subscribeToRatingsUpdates = (horizon) => {
+export const subscribeToRatingsUpdates = (firebase) => {
   return (dispatch) => {
-    watchRatings(horizon).subscribe(
+    watchRatings(firebase).subscribe(
       (diff) => {
         // normally we would put inspecting data inside a reducer, but it would be nice to be able to reuse
         // the same reducer we already have, so normalize here

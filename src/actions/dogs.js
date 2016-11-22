@@ -6,7 +6,7 @@ import { subscribeToRatingsUpdates } from './ratings';
 import {
   getAllDogs,
   getSpecificDog,
-} from '../services/horizon';
+} from '../services/firebase';
 
 export const GET_ALL_DOGS_FAILED = 'GET_ALL_DOGS_FAILED';
 export const GET_ALL_DOGS_SUCCEEDED = 'GET_ALL_DOGS_SUCCEEDED';
@@ -19,11 +19,11 @@ export const getAllDogsFailed = (error) => {
   return { type: GET_ALL_DOGS_FAILED, payload: { error } };
 };
 
-export const getAllDogsAsync = (horizon) => {
+export const getAllDogsAsync = (firebase) => {
   return (dispatch) => {
     dispatch(loadingStarted());
 
-    const dogObservable = getAllDogs(horizon);
+    const dogObservable = getAllDogs(firebase);
     dogObservable.subscribe(
       (dogs) => {
         dispatch(getAllDogsSucceeded(dogs));
@@ -33,7 +33,7 @@ export const getAllDogsAsync = (horizon) => {
         dispatch(getAllDogsFailed(error));
         dispatch(loadingEnded());
       },
-      () => dispatch(subscribeToRatingsUpdates(horizon)),
+      () => dispatch(subscribeToRatingsUpdates(firebase)),
     );
 
     return dogObservable;
@@ -51,11 +51,11 @@ export const getSpecificDogFailed = (error) => {
   return { type: GET_SPECIFIC_DOG_FAILED, payload: { error } };
 };
 
-export const getSpecificDogAsync = (horizon, id) => {
+export const getSpecificDogAsync = (firebase, id) => {
   return (dispatch) => {
     dispatch(loadingStarted());
 
-    const dogObservable = getSpecificDog(horizon, id);
+    const dogObservable = getSpecificDog(firebase, id);
     dogObservable.subscribe(
       dogs => dispatch(getSpecificDogSucceeded(dogs)),
       (error) => {
