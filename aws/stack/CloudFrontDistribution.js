@@ -12,6 +12,7 @@ module.exports = {
       DefaultRootObject: 'index.html',
       PriceClass: 'PriceClass_100',
       DefaultCacheBehavior: {
+        Compress: true,
         TargetOriginId: join(['S3-', ref('ProjectName')]),
         ViewerProtocolPolicy: 'redirect-to-https',
         MinTTL: 0,
