@@ -77,7 +77,8 @@
     "lint": "eslint . && stylelint src/stylesheets/*.css",
     "start": "webpack-dev-server",
     "test": "jest",
-    "webpack": "webpack -pc"
+    "webpack": "webpack -pc",
+    "size": "NODE_ENV=production npmb webpack -pc > /dev/null 2>&1 && du -h dist/main.js"
   },
   "version": "0.0.2"
 }
