@@ -8,6 +8,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import ReactGA from 'react-ga';
 
 import reducer from './reducers';
+import Routes from './components/Routes';
 import {
   SHOW_DEV_TOOLS,
   TRACK_ANALYTICS,
@@ -26,10 +27,6 @@ if (TRACK_ANALYTICS) {
 
 const rootEl = document.getElementById('main');
 const render = () => {
-  // See here for explanation of why this require() is needed:
-  // https://github.com/reactjs/redux/pull/1455/files#r54380102
-  const Routes = require('./components/Routes').default; // eslint-disable-line global-require
-
   ReactDOM.render(
     <Provider store={ store }>
       <Routes />
