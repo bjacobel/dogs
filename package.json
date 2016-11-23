@@ -77,7 +77,7 @@
     "start": "webpack-dev-server",
     "test": "jest",
     "webpack": "webpack -p",
-    "size": "NODE_ENV=production webpack -pc > /dev/null 2>&1 && du -h dist/main.js"
+    "size": "NODE_ENV=production webpack -p > /dev/null 2>&1 && gzip -c9 dist/main.js > /tmp/main.gzip.js && du -h /tmp/main.gzip.js"
   },
   "version": "0.0.2"
 }
