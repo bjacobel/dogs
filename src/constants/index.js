@@ -1,5 +1,5 @@
 export const SHOW_DEV_TOOLS = process.env.NODE_ENV !== 'production';
-export const TRACK_ANALYTICS = process.env.NODE_ENV !== 'production';
+export const TRACK_ANALYTICS = process.env.NODE_ENV === 'production';
 export const FIREBASE_AUTH = {
   apiKey: 'AIzaSyC_iIPQJZSTuraw-SzSyqot7TGqt1rHuz8',
   authDomain: 'dogs-34514.firebaseapp.com',
