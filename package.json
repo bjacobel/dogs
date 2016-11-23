@@ -58,6 +58,9 @@
       "^.+\\.css|svg$": "<rootDir>/__mocks__/stylesheets.js",
       "@horizon/client": "<rootDir>/__mocks__/@horizon-client.js"
     },
+    "setupFiles": [
+      "./tests/setup.js"
+    ],
     "testPathDirs": [
       "./tests"
     ],

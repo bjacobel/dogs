@@ -6,6 +6,8 @@ import {
 
 
 describe('loading reducer', () => {
+  console.error = jest.fn();
+
   describe(`action type ${GET_ALL_DOGS_FAILED}`, () => {
     it('sets error in state', () => {
       expect(error({}, { type: GET_ALL_DOGS_FAILED, payload: { error: { e: 1 } } })).toEqual({ e: 1 });

@@ -23,7 +23,7 @@ export const getAllDogsAsync = (firebase) => {
   return (dispatch) => {
     dispatch(loadingStarted());
 
-    getAllDogs(firebase)
+    return getAllDogs(firebase)
       .then((dogs) => {
         dispatch(getAllDogsSucceeded(dogs.val()));
         dispatch(subscribeToRatingsUpdates(firebase));
@@ -51,7 +51,7 @@ export const getSpecificDogAsync = (firebase, id) => {
   return (dispatch) => {
     dispatch(loadingStarted());
 
-    getSpecificDog(firebase, id)
+    return getSpecificDog(firebase, id)
       .then((dog) => {
         dispatch(getSpecificDogSucceeded(dog.val()));
         dispatch(loadingEnded());

@@ -47,7 +47,7 @@ export const updateRatingsAsync = (firebase, winner, loser) => {
 
 export const subscribeToRatingsUpdates = (firebase) => {
   return (dispatch) => {
-    const success = newVal => dispatch(updateRatingSucceeded(newVal.val().id, newVal.val().rating))
+    const success = newVal => dispatch(updateRatingSucceeded(newVal.val().id, newVal.val().rating));
     const fail = error => dispatch(updateRatingFailed(error));
 
     return watchRatings(firebase, success, fail);
