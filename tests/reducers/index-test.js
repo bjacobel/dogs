@@ -1,17 +1,17 @@
-jest.mock('redux');
 import { combineReducers } from 'redux';
-
-jest.mock('../../src/reducers/dogs');
-jest.mock('../../src/reducers/loading');
-jest.mock('../../src/reducers/error');
-jest.mock('../../src/reducers/ratings');
-jest.mock('../../src/reducers/firebase');
 
 import dogs from '../../src/reducers/dogs';
 import loading from '../../src/reducers/loading';
 import error from '../../src/reducers/error';
 import ratings from '../../src/reducers/ratings';
 import firebase from '../../src/reducers/firebase';
+
+jest.mock('redux');
+jest.mock('../../src/reducers/dogs');
+jest.mock('../../src/reducers/loading');
+jest.mock('../../src/reducers/error');
+jest.mock('../../src/reducers/ratings');
+jest.mock('../../src/reducers/firebase');
 
 describe('reducer index', () => {
   it('combines all my reducers', () => {

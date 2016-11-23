@@ -1,8 +1,9 @@
-jest.mock('../../src/components/Dog');
-import { DogPageComponent } from '../../src/components/DogPage';
-
 import React from 'react';
 import { shallow } from 'enzyme';
+
+import { DogPageComponent } from '../../src/components/DogPage';
+
+jest.mock('../../src/components/Dog');
 
 describe('child component', () => {
   it('calls getSpecificDogAsync (with a firebase client) with the param it recieves in props', () => {

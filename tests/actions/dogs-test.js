@@ -17,13 +17,13 @@ import {
   LOADING_STARTED,
   LOADING_ENDED,
 } from '../../src/actions/loading';
-
-jest.mock('../../src/services/firebase');
 import {
   getAllDogs,
   getSpecificDog,
   watchRatings,
 } from '../../src/services/firebase';
+
+jest.mock('../../src/services/firebase');
 
 const mockStore = configureMockStore([thunk]);
 
