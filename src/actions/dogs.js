@@ -26,8 +26,8 @@ export const getAllDogsAsync = (firebase) => {
     getAllDogs(firebase)
       .then((dogs) => {
         dispatch(getAllDogsSucceeded(dogs.val()));
+        dispatch(subscribeToRatingsUpdates(firebase));
         dispatch(loadingEnded());
-        subscribeToRatingsUpdates(firebase);
       })
       .catch((error) => {
         dispatch(getAllDogsFailed(error));

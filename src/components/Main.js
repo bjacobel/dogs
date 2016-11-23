@@ -29,7 +29,9 @@ const mapDispatchToProps = {
 export class MainComponent extends Component {
   componentWillMount() {
     const firebase = this.props.getOrCreateFirebaseClient();
-    this.props.getAllDogsAsync(firebase);
+    if (Object.keys(this.props.dogs).length <= 1) {
+      this.props.getAllDogsAsync(firebase);
+    }
   }
 
   render() {

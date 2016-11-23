@@ -11,13 +11,13 @@ export const getAllDogs = (firebase) => {
 };
 
 export const getSpecificDog = (firebase, id) => {
-  return firebase.ref(`/dogs/${id}`).once('value').val();
+  return firebase.ref(`/dogs/${id}`).once('value');
 };
 
 export const updateRating = (firebase, id, newRating) => {
-  return firebase.ref(`/dogs/${id}`).update({ rating: newRating }).val();
+  return firebase.ref(`/dogs/${id}`).update({ rating: newRating });
 };
 
-export const watchRatings = (firebase) => {
-  return firebase.ref('/dogs').watch('value');
+export const watchRatings = (firebase, success, fail) => {
+  return firebase.ref('/dogs').on('child_changed', success, fail);
 };

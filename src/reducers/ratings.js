@@ -16,7 +16,11 @@ export default (state = [], action) => {
 
   switch (action.type) {
   case GET_ALL_DOGS_SUCCEEDED:
-    return action.payload.dogs.filter(x => x.rating).map(x => ({ id: x.id, rating: x.rating })).sort(sortOrder);
+    // @TODO: The iteration here could be much smarter, could do this with a single loop?
+    return Object.values(action.payload.dogs)
+      .filter(x => x.rating)
+      .map(x => ({ id: x.id, rating: x.rating }))
+      .sort(sortOrder);
   case UPDATE_RATING_SUCCEEDED:
     indexOfExistingDog = state.findIndex(x => x.id === action.payload.id);
 
