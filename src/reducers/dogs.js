@@ -8,11 +8,7 @@ import { UPDATE_RATING_SUCCEEDED } from '../actions/ratings';
 export default (state = {}, action) => {
   switch (action.type) {
   case GET_ALL_DOGS_SUCCEEDED:
-    return action.payload.dogs.reduce((accum, current) => {
-      return Object.assign({}, accum, {
-        [current.id]: current,
-      });
-    }, {});
+    return action.payload.dogs;
   case GET_SPECIFIC_DOG_SUCCEEDED:
     return Object.assign({}, state, { [action.payload.dog.id]: action.payload.dog });
   case UPDATE_RATING_SUCCEEDED:

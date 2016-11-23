@@ -11,10 +11,10 @@ describe('title reducer', () => {
       expect(dogs({ 3: { id: 3 } }, {
         type: GET_ALL_DOGS_SUCCEEDED,
         payload: {
-          dogs: [
-            { id: 1 },
-            { id: 2 },
-          ],
+          dogs: {
+            1: { id: 1 },
+            2: { id: 2 },
+          },
         },
       })).toEqual({
         1: { id: 1 },

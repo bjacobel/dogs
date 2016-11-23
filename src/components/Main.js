@@ -11,25 +11,27 @@ import { getAllDogsAsync } from '../actions/dogs';
 import {
   updateRatingsAsync,
 } from '../actions/ratings';
-import { getOrCreateHorizonClient } from '../actions/horizon';
+import { getOrCreateFirebaseClient } from '../actions/firebase';
 
 const mapStateToProps = state => ({
   dogs: state.dogs,
   ratings: state.ratings,
   loading: state.loading,
-  horizon: state.horizon,
+  firebase: state.firebase,
 });
 
 const mapDispatchToProps = {
   getAllDogsAsync,
   updateRatingsAsync,
-  getOrCreateHorizonClient,
+  getOrCreateFirebaseClient,
 };
 
 export class MainComponent extends Component {
   componentWillMount() {
-    const horizon = this.props.getOrCreateHorizonClient();
-    this.props.getAllDogsAsync(horizon);
+    const firebase = this.props.getOrCreateFirebaseClient();
+    if (Object.keys(this.props.dogs).length <= 1) {
+      this.props.getAllDogsAsync(firebase);
+    }
   }
 
   render() {
@@ -37,7 +39,7 @@ export class MainComponent extends Component {
       dogs,
       loading,
       ratings,
-      horizon,
+      firebase,
       updateRatingsAsync,  // eslint-disable-line no-shadow
     } = this.props;
 
@@ -46,7 +48,7 @@ export class MainComponent extends Component {
         <Loading loading={ loading } />
         <Standings dogs={ dogs } ratings={ ratings } />
         <div className={ styles.voteWrapper }>
-          <Vote dogs={ dogs } voteMethod={ updateRatingsAsync } horizon={ horizon } loading={ loading } />
+          <Vote dogs={ dogs } voteMethod={ updateRatingsAsync } firebase={ firebase } loading={ loading } />
         </div>
       </div>
     );

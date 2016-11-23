@@ -1,6 +1,5 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { Observable } from 'rxjs';
 
 import {
   GET_ALL_DOGS_FAILED,
@@ -18,13 +17,13 @@ import {
   LOADING_STARTED,
   LOADING_ENDED,
 } from '../../src/actions/loading';
-
-jest.mock('../../src/services/horizon');
 import {
   getAllDogs,
   getSpecificDog,
   watchRatings,
-} from '../../src/services/horizon';
+} from '../../src/services/firebase';
+
+jest.mock('../../src/services/firebase');
 
 const mockStore = configureMockStore([thunk]);
 
@@ -32,10 +31,10 @@ describe('dog actions', () => {
   describe('dog collection actions', () => {
     describe('getAllDogsSucceeded', () => {
       it('returns a type and the passed objects in payload', () => {
-        expect(getAllDogsSucceeded([{ id: 1 }])).toEqual({
+        expect(getAllDogsSucceeded({ 1: { id: 1 } })).toEqual({
           type: GET_ALL_DOGS_SUCCEEDED,
           payload: {
-            dogs: [{ id: 1 }],
+            dogs: { 1: { id: 1 } },
           },
         });
       });
@@ -57,12 +56,16 @@ describe('dog actions', () => {
 
       beforeEach(() => {
         store = mockStore({});
-        getAllDogs.mockImplementation(() => Observable.of([{ id: 1 }]));
-        watchRatings.mockImplementation(() => Observable.of([{ type: 'add', id: 1, rating: 1000 }]));
+        getAllDogs.mockImplementation(() => Promise.resolve({
+          val: () => ({ 1: { id: 1 }, 2: { id: 2 } }),
+        }));
+        watchRatings.mockImplementation(() => Promise.resolve({
+          val: () => ({ 1: { id: 1, rating: 5000 } }),
+        }));
       });
 
       it('dispatches loadingStarted', () => {
-        store.dispatch(getAllDogsAsync()).subscribe(() => {
+        return store.dispatch(getAllDogsAsync()).then(() => {
           expect(store.getActions()).toEqual(jasmine.arrayContaining([
             { type: LOADING_STARTED },
           ]));
@@ -70,7 +73,7 @@ describe('dog actions', () => {
       });
 
       it('calls getAllDogs, then on success it dispatches loadingEnded and getAllDogsSucceeded', () => {
-        store.dispatch(getAllDogsAsync()).subscribe(() => {
+        return store.dispatch(getAllDogsAsync()).then(() => {
           expect(store.getActions()).toEqual(jasmine.arrayContaining([
             { type: LOADING_ENDED },
             jasmine.objectContaining({ type: GET_ALL_DOGS_SUCCEEDED }),
@@ -79,9 +82,9 @@ describe('dog actions', () => {
       });
 
       it('calls getAllDogs, on fail it dispatches loadingEnded and getAllDogsFailed', () => {
-        getAllDogs.mockImplementationOnce(() => Observable.throw('error'));
+        getAllDogs.mockImplementationOnce(() => Promise.reject('error'));
 
-        store.dispatch(getAllDogsAsync()).subscribe(jest.fn(), () => {
+        return store.dispatch(getAllDogsAsync()).catch(() => {
           expect(store.getActions()).toEqual(jasmine.arrayContaining([
             { type: LOADING_ENDED },
             jasmine.objectContaining({ type: GET_ALL_DOGS_FAILED }),
@@ -90,13 +93,9 @@ describe('dog actions', () => {
       });
 
       it('calls getAllDogs, on close it starts a watcher for ratings events', () => {
-        store.dispatch(getAllDogsAsync()).subscribe(
-          jest.fn(),
-          jest.fn(),
-          () => {
-            expect(watchRatings).toHaveBeenCalled();
-          },
-        );
+        return store.dispatch(getAllDogsAsync()).then(() => {
+          expect(watchRatings).toHaveBeenCalled();
+        });
       });
     });
   });
@@ -129,11 +128,13 @@ describe('dog actions', () => {
 
       beforeEach(() => {
         store = mockStore({});
-        getSpecificDog.mockImplementation(() => Observable.of({ id: 1 }));
+        getSpecificDog.mockImplementation(() => Promise.resolve({
+          val: () => ({ id: 1 }),
+        }));
       });
 
       it('dispatches loadingStarted', () => {
-        store.dispatch(getSpecificDogAsync()).subscribe(() => {
+        return store.dispatch(getSpecificDogAsync()).then(() => {
           expect(store.getActions()).toEqual(jasmine.arrayContaining([
             { type: LOADING_STARTED },
           ]));
@@ -141,7 +142,7 @@ describe('dog actions', () => {
       });
 
       it('calls getSpecificDog, then on success it dispatches loadingEnded and getSpecificDogSucceeded', () => {
-        store.dispatch(getSpecificDogAsync()).subscribe(() => {
+        return store.dispatch(getSpecificDogAsync()).then(() => {
           expect(store.getActions()).toEqual(jasmine.arrayContaining([
             { type: LOADING_ENDED },
             jasmine.objectContaining({ type: GET_SPECIFIC_DOG_SUCCEEDED }),
@@ -150,9 +151,9 @@ describe('dog actions', () => {
       });
 
       it('calls getSpecificDog, on fail it dispatches loadingEnded and getSpecificDogFailed', () => {
-        getSpecificDog.mockImplementationOnce(() => Observable.throw('error'));
+        getSpecificDog.mockImplementationOnce(() => Promise.reject('error'));
 
-        store.dispatch(getSpecificDogAsync()).subscribe(jest.fn(), () => {
+        return store.dispatch(getSpecificDogAsync()).catch(() => {
           expect(store.getActions()).toEqual(jasmine.arrayContaining([
             { type: LOADING_ENDED },
             jasmine.objectContaining({ type: GET_SPECIFIC_DOG_FAILED }),

@@ -1,25 +1,26 @@
-jest.mock('../../src/components/Dog');
-import { DogPageComponent } from '../../src/components/DogPage';
-
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import { DogPageComponent } from '../../src/components/DogPage';
+
+jest.mock('../../src/components/Dog');
+
 describe('child component', () => {
-  it('calls getSpecificDogAsync (with a horizon client) with the param it recieves in props', () => {
+  it('calls getSpecificDogAsync (with a firebase client) with the param it recieves in props', () => {
     const getSpecificDogAsync = jest.fn();
-    const getOrCreateHorizonClient = jest.fn(() => 'hz');
+    const getOrCreateFirebaseClient = jest.fn(() => 'fb');
 
     shallow(
       <DogPageComponent
         params={ { id: 'foo' } }
         dogs={ {} }
         getSpecificDogAsync={ getSpecificDogAsync }
-        getOrCreateHorizonClient={ getOrCreateHorizonClient }
+        getOrCreateFirebaseClient={ getOrCreateFirebaseClient }
       />,
     );
 
-    expect(getSpecificDogAsync).lastCalledWith('hz', 'foo');
-    expect(getOrCreateHorizonClient).toHaveBeenCalled();
+    expect(getSpecificDogAsync).lastCalledWith('fb', 'foo');
+    expect(getOrCreateFirebaseClient).toHaveBeenCalled();
   });
 
   it("doesn't call getSpecificDogAsync if that dog's id is already in state", () => {

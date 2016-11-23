@@ -4,7 +4,7 @@ import calculateElo from '../services/elo';
 import {
   updateRating,
   watchRatings,
-} from '../services/horizon';
+} from '../services/firebase';
 import {
   loadingStarted,
   loadingEnded,
@@ -21,49 +21,35 @@ export const updateRatingFailed = (error) => {
   return { type: UPDATE_RATING_FAILED, payload: { error } };
 };
 
-export const updateRatingsAsync = (horizon, winner, loser) => {
+export const updateRatingsAsync = (firebase, winner, loser) => {
   return (dispatch) => {
     dispatch(loadingStarted());
 
     const { winnerNewRating, loserNewRating } = calculateElo(winner, loser);
-    const ratings = {
-      [winner.id]: winnerNewRating,
-      [loser.id]: loserNewRating,
-    };
+    const updateWinnerPromise = updateRating(firebase, winner.id, winnerNewRating);
+    const updateLoserPromise = updateRating(firebase, loser.id, loserNewRating);
 
-    const updateWinnerObservable = updateRating(horizon, winner.id, winnerNewRating);
-    const updateLoserObservable = updateRating(horizon, loser.id, loserNewRating);
-    const mergedObservable = updateWinnerObservable.merge(updateLoserObservable);
-
-    mergedObservable.subscribe(
-      data => dispatch(updateRatingSucceeded(data.id, ratings[data.id])),
-      (error) => {
+    return Promise.all([updateWinnerPromise, updateLoserPromise])
+      .then(() => {
+        // Don't need to dispatch an update success here because our listener will get it automatically
+        dispatch(loadingEnded());
+        ReactGA.event({
+          category: 'User actions',
+          action: 'Vote cast',
+        });
+      })
+      .catch((error) => {
         dispatch(updateRatingFailed(error));
         dispatch(loadingEnded());
-      },
-      () => dispatch(loadingEnded()),
-    );
-
-    ReactGA.event({
-      category: 'Vote',
-      action: 'Voted for a dog',
-    });
-
-    return mergedObservable;
+      });
   };
 };
 
-export const subscribeToRatingsUpdates = (horizon) => {
+export const subscribeToRatingsUpdates = (firebase) => {
   return (dispatch) => {
-    watchRatings(horizon).subscribe(
-      (diff) => {
-        // normally we would put inspecting data inside a reducer, but it would be nice to be able to reuse
-        // the same reducer we already have, so normalize here
-        if (['change', 'add'].includes(diff.type)) {
-          dispatch(updateRatingSucceeded(diff.new_val.id, diff.new_val.rating));
-        }
-      },
-      error => dispatch(updateRatingFailed(error)),
-    );
+    const success = newVal => dispatch(updateRatingSucceeded(newVal.val().id, newVal.val().rating));
+    const fail = error => dispatch(updateRatingFailed(error));
+
+    return watchRatings(firebase, success, fail);
   };
 };

@@ -6,7 +6,7 @@ import { subscribeToRatingsUpdates } from './ratings';
 import {
   getAllDogs,
   getSpecificDog,
-} from '../services/horizon';
+} from '../services/firebase';
 
 export const GET_ALL_DOGS_FAILED = 'GET_ALL_DOGS_FAILED';
 export const GET_ALL_DOGS_SUCCEEDED = 'GET_ALL_DOGS_SUCCEEDED';
@@ -19,24 +19,20 @@ export const getAllDogsFailed = (error) => {
   return { type: GET_ALL_DOGS_FAILED, payload: { error } };
 };
 
-export const getAllDogsAsync = (horizon) => {
+export const getAllDogsAsync = (firebase) => {
   return (dispatch) => {
     dispatch(loadingStarted());
 
-    const dogObservable = getAllDogs(horizon);
-    dogObservable.subscribe(
-      (dogs) => {
-        dispatch(getAllDogsSucceeded(dogs));
+    return getAllDogs(firebase)
+      .then((dogs) => {
+        dispatch(getAllDogsSucceeded(dogs.val()));
+        dispatch(subscribeToRatingsUpdates(firebase));
         dispatch(loadingEnded());
-      },
-      (error) => {
+      })
+      .catch((error) => {
         dispatch(getAllDogsFailed(error));
         dispatch(loadingEnded());
-      },
-      () => dispatch(subscribeToRatingsUpdates(horizon)),
-    );
-
-    return dogObservable;
+      });
   };
 };
 
@@ -51,20 +47,18 @@ export const getSpecificDogFailed = (error) => {
   return { type: GET_SPECIFIC_DOG_FAILED, payload: { error } };
 };
 
-export const getSpecificDogAsync = (horizon, id) => {
+export const getSpecificDogAsync = (firebase, id) => {
   return (dispatch) => {
     dispatch(loadingStarted());
 
-    const dogObservable = getSpecificDog(horizon, id);
-    dogObservable.subscribe(
-      dogs => dispatch(getSpecificDogSucceeded(dogs)),
-      (error) => {
+    return getSpecificDog(firebase, id)
+      .then((dog) => {
+        dispatch(getSpecificDogSucceeded(dog.val()));
+        dispatch(loadingEnded());
+      })
+      .catch((error) => {
         dispatch(getSpecificDogFailed(error));
         dispatch(loadingEnded());
-      },
-      () => dispatch(loadingEnded()),
-    );
-
-    return dogObservable;
+      });
   };
 };
