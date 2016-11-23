@@ -30,7 +30,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.7.1",
-    "extract-text-webpack-plugin": "^1.0.1",
+    "extract-text-webpack-plugin": "^v2.0.0-beta.4",
     "file-loader": "^0.9.0",
     "jest-cli": "^17.0.3",
     "postcss-font-magician": "^1.5.0",
@@ -44,8 +44,8 @@
     "stylelint-config-css-modules": "^0.1.0",
     "stylelint-config-standard": "^15.0.0",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.3",
-    "webpack-dev-server": "^1.14.1"
+    "webpack": "^v2.1.0-beta.27",
+    "webpack-dev-server": "^v2.1.0-beta.11"
   },
   "engines": {
     "node": "^6.7.0"
@@ -76,8 +76,8 @@
     "lint": "eslint . && stylelint src/stylesheets/*.css",
     "start": "webpack-dev-server",
     "test": "jest",
-    "webpack": "webpack -pc",
-    "size": "NODE_ENV=production webpack -pc > /dev/null 2>&1 && du -h dist/main.js"
+    "webpack": "webpack -p",
+    "size": "NODE_ENV=production webpack -p > /dev/null 2>&1 && gzip -c9 dist/main.js > /tmp/main.gzip.js && du -h /tmp/main.gzip.js"
   },
   "version": "0.0.2"
 }

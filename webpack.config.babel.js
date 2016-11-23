@@ -16,33 +16,35 @@ const wpconfig = {
     publicPath: '/',
     filename: '[name].js',
   },
-  debug: true,
-  devtool: isProd ? null : 'source-map',
+  devtool: isProd ? false : 'source-map',
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.woff(2)?(\?[a-z0-9=]+)?$/,
-        loader: 'url?limit=64000',
+        loader: 'url-loader?limit=64000',
       },
       {
         test: /\.(ttf|eot|svg)(\?[a-z0-9=]+)?$/,
-        loader: 'file',
+        loader: 'file-loader',
       },
       {
         test: /\.js$/,
         include: path.join(__dirname, 'src'),
-        loader: 'babel',
+        loader: 'babel-loader',
       },
       {
         test: /\.css$/,
         loader: isProd ?
-          ExtractTextPlugin.extract('style', `css?${cssLoaderConfig}!postcss`) :
-          `style!css?sourceMap&${cssLoaderConfig}!postcss`,
+          ExtractTextPlugin.extract({
+            fallbackLoader: 'style-loader',
+            loader: `css-loader?${cssLoaderConfig}!postcss-loader`,
+          }) :
+          `style-loader!css-loader?sourceMap&${cssLoaderConfig}!postcss-loader`,
       },
     ],
   },
   resolve: {
-    extensions: ['', '.js', '.json', '.css'],
+    extensions: ['.js', '.json', '.css'],
   },
   plugins: [
     new webpack.NoErrorsPlugin(),
@@ -58,19 +60,21 @@ const wpconfig = {
 };
 
 if (!isProd) {
-  wpconfig.entry.main = [
-    'webpack-dev-server/client',
-    'webpack/hot/only-dev-server',
-    ...wpconfig.entry.main,
-  ];
-
   wpconfig.plugins = [
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
+    new webpack.LoaderOptionsPlugin({
+      debug: true,
+    }),
     ...wpconfig.plugins,
   ];
 } else {
   wpconfig.plugins = [
     new ExtractTextPlugin('[name].css'),
+    new webpack.LoaderOptionsPlugin({
+      debug: false,
+      minimize: true,
+    }),
     new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(true),
     ...wpconfig.plugins,
