@@ -1,10 +1,8 @@
-@value highlightTextColor from './colors.css';
-
 .spinner {
   height: 30px;
   width: 30px;
   animation: rotate 0.8s infinite linear;
-  border: 7px solid highlightTextColor;
+  border: 7px solid highlightTextColor from './colors.css';
   border-right-color: transparent;
   border-radius: 50%;
 }
