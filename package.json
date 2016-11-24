@@ -1,6 +1,7 @@
 {
   "author": "Brian Jacobel <brian@bjacobel.com> (https://bjacobel.com)",
   "dependencies": {
+    "classnames": "^2.2.5",
     "core-js": "^2.4.1",
     "firebase": "^3.6.1",
     "react": "^15.4.1",
