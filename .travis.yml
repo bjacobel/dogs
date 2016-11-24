@@ -7,7 +7,7 @@ cache:
     - node_modules
 env:
   global:
-    - NODE_ENV=test
+    - NODE_ENV=production
     - PATH=$PATH:$HOME/.local/bin
 before_install:
   - npm install --global yarnpkg
@@ -19,7 +19,7 @@ script:
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 before_deploy:
-  - NODE_ENV=production yarn run webpack
+  - yarn run webpack
   - cp index.html dist/index.html
   - pip install --user awscli
 deploy:
