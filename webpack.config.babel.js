@@ -53,7 +53,7 @@ const wpconfig = {
     }),
   ],
   devServer: {
-    hot: true,
+    hot: !isProd,
     publicPath: '/',
     historyApiFallback: true,
   },
