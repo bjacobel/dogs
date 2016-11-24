@@ -87,9 +87,11 @@ export default class Vote extends Component {
     return (
       <div className={ styles.voteContainer }>
         <button className={ styles.vote } onClick={ () => voteMethod(firebase, this.dog1, this.dog2) }>
+          <div className={ styles.voteIndicator } />
           <Dog dog={ this.dog1 } />
         </button>
-        <button className={ styles.vote } onClick={ () => voteMethod(firebase, this.dog2, this.dog1) } >
+        <button className={ styles.vote } onClick={ () => voteMethod(firebase, this.dog2, this.dog1) }>
+          <div className={ styles.voteIndicator } />
           <Dog dog={ this.dog2 } />
         </button>
       </div>

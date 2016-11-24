@@ -30,6 +30,25 @@
     transform: scale(1.015);
   }
 
+  &:active {
+    .voteIndicator {
+      opacity: 0.3;
+    }
+  }
+
+  .voteIndicator {
+    opacity: 0;
+    background-color: grey;
+    background-image: url('../assets/images/arrow.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    transition: opacity 0.2s;
+  }
+
   @media (max-width: 600px) {
     max-width: unset;
     max-height: 50%;
