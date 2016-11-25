@@ -20,6 +20,7 @@ export default class Vote extends Component {
 
   componentWillMount() {
     this.setState({ showVoteAnim: 0 });
+    this.newDogs();
     document.addEventListener('keydown', this.voteWithKey);
   }
 

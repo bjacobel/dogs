@@ -11,7 +11,7 @@
   @media (max-width: 600px) {
     width: unset;
     max-width: 100%;
-    max-height: calc(((100vh - 50px) / 2) - 64px - 40px);
+    max-height: calc(((100vh - 50px) / 2) - 32px - 30px);
   }
 }
 
@@ -28,6 +28,11 @@
   * {
     display: inline-block;
   }
+
+  @media (max-width: 600px) {
+    height: 32px;
+    padding: 8px;
+  }
 }
 
 .authorPhoto {
@@ -38,6 +43,11 @@
   width: iconSize;
   height: iconSize;
   margin-right: 10px;
+
+  @media (max-width: 600px) {
+    width: calc(iconSize / 2);
+    height: calc(iconSize / 2);
+  }
 }
 
 .authorName {
@@ -54,8 +64,16 @@
   line-height: 29px;
   font-size: 1rem;
   composes: link from './link.css';
+
+  @media (max-width: 600px) {
+    line-height: 16px;
+  }
 }
 
 .instagramLogo {
   height: 29px;
+
+  @media (max-width: 600px) {
+    height: 16px;
+  }
 }
